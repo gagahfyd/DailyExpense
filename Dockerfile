@@ -1,25 +1,29 @@
+# ---------- PHP + Composer ----------
 FROM php:8.4-fpm
 
-# Install dependencies
+# system deps
 RUN apt-get update && apt-get install -y \
     git curl unzip libpng-dev libonig-dev libxml2-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer
+# composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
-
-# Copy project
 COPY . .
 
-# Install PHP dependencies
+# ---------- Frontend build (Vite) ----------
+# install Node (simple method)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm ci \
+    && npm run build
+
+# ---------- Laravel deps ----------
 RUN composer install --no-dev --optimize-autoloader
 
-# Permission
+# permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache
 
-EXPOSE 8000
-
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD ["php-fpm"]
