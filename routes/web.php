@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', fn() => redirect()->route('pengeluaran.index'));
+Route::get('/', fn() => redirect()->route('statistik.index'));
 
 Route::resource('kategori', KategoriPengeluaranController::class);
 Route::resource('pengeluaran', PengeluaranController::class);
