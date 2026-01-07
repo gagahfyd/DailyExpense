@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* =========================
+   DAILYEXPENSE THEME (Scoped)
+   Semua selector diawali .de-app agar tidak tabrakan Tailwind
+========================= */
+
+.de-app{
+  --bg: #F5F5F1;              /* 60% */
+  --primary: #388087;         /* 30% */
+  --accent: #BADFE7;          /* 10% */
+
+  --surface: #ffffff;
+  --border: rgba(16,42,46,.14);
+  --text: #102A2E;
+  --muted: rgba(16,42,46,.65);
+
+  --shadow: 0 10px 30px rgba(16,42,46,.08);
+  --radius: 14px;
+
+  --danger: #dc2626;
+  --danger-600: #b91c1c;
+
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+}
+
+/* Reset kecil (tanpa ganggu Tailwind global) */
+.de-app *{ box-sizing: border-box; }
+
+/* Link */
+.de-app a{ text-decoration: none; }
+.de-app a:hover{ text-decoration: underline; }
+
+/* =========================
+   CARD
+========================= */
+.de-app .card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.de-app .card-header{
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.de-app .card-body{
+  padding: 18px;
+}
+
+/* =========================
+   TABLE (aman untuk tombol aksi)
+========================= */
+.de-app .table-wrap{
+  overflow-x: auto;
+  border-radius: 14px;
+}
+
+.de-app .table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.de-app .table th{
+  text-align: left;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(16,42,46,.75);
+  background: rgba(186,223,231,.35); /* accent tint */
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+  white-space: nowrap;
+}
+
+.de-app .table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(16,42,46,.08);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.de-app .table tr:last-child td{ border-bottom: 0; }
+
+.de-app .table tbody tr:hover td{
+  background: rgba(186,223,231,.14);
+}
+
+/* Kolom aksi: tidak mepet kanan, aman untuk flex */
+.de-app .table .col-action{
+  width: 180px;              /* lebih pas */
+  text-align: center;        /* header & cell center */
+  padding-left: 0;
+  padding-right: 40px;   /* kasih ruang untuk tombol */
+}
+
+.de-app .table th.col-action{
+  text-align: center;
+}
+
+.de-app .table td.col-action{
+  text-align: center;
+}
+
+/* tombol di tengah kolom */
+.de-app .table td.col-action .actions{
+  justify-content: center;
+}
+
+/* =========================
+   BUTTON
+   Catatan: ini tidak override Tailwind .btn karena scoped
+========================= */
+.de-app .btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .05s ease, background .15s ease, border-color .15s ease, filter .15s ease;
+}
+
+.de-app .btn:active{ transform: translateY(1px); }
+
+/* Primary */
+.de-app .btn-primary{
+  background: var(--primary);
+  color: #fff;
+}
+.de-app .btn-primary:hover{
+  filter: brightness(1.05);
+}
+
+/* Ghost */
+.de-app .btn-ghost{
+  background: transparent;
+  color: var(--text);
+  border-color: rgba(16,42,46,.16);
+}
+.de-app .btn-ghost:hover{
+  background: rgba(186,223,231,.25);
+  border-color: rgba(56,128,135,.35);
+}
+
+/* Danger */
+.de-app .btn-danger{
+  background: var(--danger);
+  color: #fff;
+}
+.de-app .btn-danger:hover{
+  background: var(--danger-600);
+}
+
+/* Icon button kecil (opsional) */
+.de-app .btn-icon{
+  padding: 9px;
+  width: 38px;
+  height: 38px;
+}
+
+/* =========================
+   ACTIONS (untuk kolom aksi)
+   FIX utama agar tidak nempel kanan & tetap rapi
+========================= */
+.de-app .actions{
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: nowrap; /* kalau layar sempit, tombol turun rapi */
+}
+
+/* form di dalam actions jangan bikin margin aneh */
+.de-app .actions form{
+  margin: 0;
+}
+
+/* kalau mau tengah khusus kolom aksi */
+.de-app td.col-action .actions{
+  justify-content: flex-start; /* rapi kiri (enterprise style) */
+}
+
+/* =========================
+   INPUTS
+========================= */
+.de-app .input,
+.de-app .textarea,
+.de-app .select{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(16,42,46,.16);
+  background: var(--surface);
+  outline: none;
+}
+
+.de-app .input:focus,
+.de-app .textarea:focus,
+.de-app .select:focus{
+  border-color: rgba(56,128,135,.55);
+  box-shadow: 0 0 0 4px rgba(186,223,231,.45);
+}
+
+.de-app .label{
+  display: block;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.de-app .help{
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* =========================
+   UTIL
+========================= */
+.de-app .muted{ color: var(--muted); }
+.de-app .right{ text-align: right; }
+.de-app .amount{
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .2px;
+}
+
+/* =========================
+   RESPONSIVE (tabel & aksi aman)
+========================= */
+@media (max-width: 640px){
+  .de-app .table th,
+  .de-app .table td{
+    padding: 10px 12px;
+  }
+
+  .de-app .table .col-action{
+    width: 190px;
+  }
+}
