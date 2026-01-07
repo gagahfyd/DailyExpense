@@ -26,4 +26,4 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache
 
-CMD ["sh", "-lc", "php -S 0.0.0.0:${PORT} -t public"]
+CMD ["sh", "-lc", "php -S 0.0.0.0:8080 -t public"]
